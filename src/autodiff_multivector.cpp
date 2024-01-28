@@ -61,7 +61,7 @@ py::list AdeptDiffInnerProductVectorBivector(const Vec &vec, const Biv &biv) {
   auto result = py::array(py::buffer_info(
       nullptr,        /* Pointer to data (nullptr -> ask NumPy to allocate!) */
       sizeof(double), /* Size of one item */
-      py::format_descriptor<double>::value(), /* Buffer format */
+      py::format_descriptor<double>::format(), /* Buffer format */
       2,                                      /* How many dimensions? */
       {3, 3},                 /* Number of elements for each dimension */
       {sizeof(double) * 3, 3} /* Strides for each dimension */
@@ -116,11 +116,11 @@ struct InnerProductVectorVectorFunctor {
 
 py::list CeresDiffInnerProductVectorVector(const Vec &vec, const Vec &vec2) {
   auto py_array_jac = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {1, 3}, {sizeof(double) * 3, sizeof(double)}));
 
   auto py_array_result = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {1, 1}, {sizeof(double), sizeof(double)}));
 
   auto buf_jac = py_array_jac.request();
@@ -141,11 +141,11 @@ py::list CeresDiffInnerProductVectorVector(const Vec &vec, const Vec &vec2) {
 }
 py::list CeresDiffInnerProductVectorBivector(const Vec &vec, const Biv &biv) {
   auto py_array_jac = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 3}, {sizeof(double) * 3, sizeof(double)}));
 
   auto py_array_result = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double) * 3, sizeof(double)}));
 
   auto buf_jac = py_array_jac.request();
@@ -212,11 +212,11 @@ struct DiffRotorMatrixFunctor {
 
 py::list CeresDiffRotorMatrix(const double theta, const Vec &a) {
   auto py_array_jac = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto py_array_result = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto buf_jac = py_array_jac.request();
@@ -248,11 +248,11 @@ struct DiffRotorVersorFunctor {
 };
 py::list CeresDiffRotorVersor(const double theta, const Vec &a) {
   auto py_array_jac = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto py_array_result = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto buf_jac = py_array_jac.request();
@@ -274,11 +274,11 @@ py::list CeresDiffRotorVersor(const double theta, const Vec &a) {
 
 py::list AdeptDiffRotorMatrixForward(const double theta, const Vec &vec) {
   auto py_array_jac = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto py_array_result = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto buf_jac = py_array_jac.request();
@@ -317,11 +317,11 @@ py::list AdeptDiffRotorMatrixForward(const double theta, const Vec &vec) {
 
 py::list AdeptDiffRotorMatrixReverse(const double theta, const Vec &vec) {
   auto py_array_jac = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto py_array_result = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto buf_jac = py_array_jac.request();
@@ -360,11 +360,11 @@ py::list AdeptDiffRotorMatrixReverse(const double theta, const Vec &vec) {
 
 py::list AdeptDiffRotorVersorForward(const double theta, const Vec &vec) {
   auto py_array_jac = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto py_array_result = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto buf_jac = py_array_jac.request();
@@ -403,11 +403,11 @@ py::list AdeptDiffRotorVersorForward(const double theta, const Vec &vec) {
 
 py::list AdeptDiffRotorVersorReverse(const double theta, const Vec &vec) {
   auto py_array_jac = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto py_array_result = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto buf_jac = py_array_jac.request();
@@ -460,11 +460,11 @@ struct DiffRotorHepGAFunctor {
 
 py::list AdeptDiffRotorHepGAForward(const double theta, const Vec &vec) {
   auto py_array_jac = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto py_array_result = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto buf_jac = py_array_jac.request();
@@ -503,11 +503,11 @@ py::list AdeptDiffRotorHepGAForward(const double theta, const Vec &vec) {
 
 py::list AdeptDiffRotorHepGAReverse(const double theta, const Vec &vec) {
   auto py_array_jac = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto py_array_result = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto buf_jac = py_array_jac.request();
@@ -546,11 +546,11 @@ py::list AdeptDiffRotorHepGAReverse(const double theta, const Vec &vec) {
 
 py::list CeresDiffRotorHepGA(const double theta, const Vec &a) {
   auto py_array_jac = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto py_array_result = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto buf_jac = py_array_jac.request();
@@ -586,11 +586,11 @@ struct DiffRotorGaalopFunctor {
 
 py::list CeresDiffRotorGaalop(const double theta, const Vec &a) {
   auto py_array_jac = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto py_array_result = py::array(py::buffer_info(
-      nullptr, sizeof(double), py::format_descriptor<double>::value(), 2,
+      nullptr, sizeof(double), py::format_descriptor<double>::format(), 2,
       {3, 1}, {sizeof(double), sizeof(double)}));
 
   auto buf_jac = py_array_jac.request();
