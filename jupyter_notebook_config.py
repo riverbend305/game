@@ -9,8 +9,9 @@ PEM_FILE = os.path.join(jupyter_data_dir(), 'notebook.pem')
 
 c = get_config()
 c.NotebookApp.ip = '*'
-c.NotebookApp.port = 3006
+c.NotebookApp.port = 8888
 c.NotebookApp.open_browser = False
+c.NotebookApp.allow_remote_access = True
 
 if not os.path.isfile(PEM_FILE):
     # Ensure PEM_FILE directory exists
