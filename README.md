@@ -6,11 +6,13 @@ GAME is framework for estimation of multivectors in geometric algebra with focus
 
 ## Docker
 ```
-docker build -t tingelst/game .
+docker build . -t tingelst/game
 ```
 ```
-docker run -v `pwd`:/home/game/game -p 8888:8888 -e PASSWORD=YOUR_PASSWORD -e USE_HTTPS=yes game
+docker run -it -v /home/<your-user-name>/path/to/game:/home/game/game -p 8888:8888 tingelst/game:latest
 ```
+
+This will run jupyter notebook and show a link that you can follow in your browser to all the python notebooks.
 
 ## Installation
 
