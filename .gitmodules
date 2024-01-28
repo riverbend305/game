@@ -5,3 +5,6 @@
 [submodule "third_party/benchmark"]
 	path = third_party/benchmark
 	url = https://github.com/google/benchmark.git
+[submodule "third_party/vahlen"]
+	path = third_party/vahlen
+	url = git@github.com:tingelst/vahlen.git
