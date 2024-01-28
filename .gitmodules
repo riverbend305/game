@@ -7,4 +7,4 @@
 	url = https://github.com/google/benchmark.git
 [submodule "third_party/vahlen"]
 	path = third_party/vahlen
-	url = git@github.com:tingelst/vahlen.git
+	url = https://github.com/tingelst/vahlen.git
