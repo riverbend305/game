@@ -166,6 +166,38 @@ target_link_libraries(versor_pybind11 ${PYTHON_LIBRARIES})
 set_target_properties(versor_pybind11 PROPERTIES PREFIX "")
 set_target_properties(versor_pybind11 PROPERTIES SUFFIX ".so")
 
+add_subdirectory(third_party/pybind11)
+pybind11_add_module(versor_pybind11 SHARED
+  src/vsr/versor_pybind11.cpp
+  src/vsr/versor_vector_pybind11.cpp
+  src/vsr/versor_bivector_pybind11.cpp
+  src/vsr/versor_rotor_pybind11.cpp
+  src/vsr/versor_point_pybind11.cpp
+  src/vsr/versor_dual_line_pybind11.cpp
+  src/vsr/versor_line_pybind11.cpp
+  src/vsr/versor_translator_pybind11.cpp
+  src/vsr/versor_motor_pybind11.cpp
+  src/vsr/versor_origin_pybind11.cpp
+  src/vsr/versor_infinity_pybind11.cpp
+  src/vsr/versor_direction_vector_pybind11.cpp
+  src/vsr/versor_direction_bivector_pybind11.cpp
+  src/vsr/versor_dual_plane_pybind11.cpp
+  src/vsr/versor_plane_pybind11.cpp
+  src/vsr/versor_general_rotor_pybind11.cpp
+  src/vsr/versor_tangent_vector_pybind11.cpp
+  src/vsr/versor_circle_pybind11.cpp
+  src/vsr/versor_sphere_pybind11.cpp
+  src/vsr/versor_point_pair_pybind11.cpp
+  src/vsr/versor_trivector_pybind11.cpp
+  src/vsr/versor_diff_pybind11.cpp
+  src/vsr/versor_reciprocal_motor_pybind11.cpp
+  src/vsr/versor_euclidean_geometric_algebra_pybind11.cpp
+  src/vsr/versor_conformal_geometric_algebra_pybind11.cpp
+  src/vsr/versor_e4_pybind11.cpp
+  src/vsr/cga_op.cpp
+  src/vsr/cga_round.cpp
+  )
+
 #add_library(linear_solver SHARED src/linear_solver.cpp)
 #target_link_libraries(linear_solver ${PYTHON_LIBRARIES})
 #set_target_properties(linear_solver PROPERTIES PREFIX "")
