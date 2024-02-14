@@ -64,16 +64,6 @@ RUN mkdir -p /usr/src/ \
 #     && make -j12 \
 #     && make install
 
-RUN cd /usr/src/ \
-    && git clone https://github.com/juanmed/game.git \
-    && cd game \
-    && git submodule update --init --recursive \
-    && git submodule update --recursive \
-    && mkdir build \
-    && cd build \
-    && cmake .. && make -j12
-#    && make install
-
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - \
     && apt-get install -y nodejs
 
@@ -89,8 +79,21 @@ RUN useradd -m -s /bin/zsh -N -u 1000 game
 
 USER game
 
-RUN mkdir /home/game/game/ \
+RUN mkdir -p /home/game/repo/ \
+    && cd /home/game/repo/ \
+    && git clone https://github.com/juanmed/game.git \
+    && cd game \
+    && git submodule update --init --recursive \
+    && git submodule update --recursive \
+    && mkdir build \
+    && cd build \
+    && cmake .. && make -j10
+#    && make install 
+
+RUN mkdir -p /home/game/game/ \
     && mkdir /home/game/.jupyter
+
+   
 
 RUN cd /home/game/ \
     && virtualenv python \
