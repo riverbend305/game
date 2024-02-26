@@ -167,7 +167,7 @@ set_target_properties(versor_pybind11 PROPERTIES PREFIX "")
 set_target_properties(versor_pybind11 PROPERTIES SUFFIX ".so")
 
 add_subdirectory(third_party/pybind11)
-pybind11_add_module(versor_pybind111 SHARED
+pybind11_add_module(versor_pybind11 SHARED
   src/vsr/versor_pybind11.cpp
   src/vsr/versor_vector_pybind11.cpp
   src/vsr/versor_bivector_pybind11.cpp
