@@ -11,6 +11,10 @@ docker build . -t tingelst/game
 ```
 docker run -it -v /home/<your-user-name>/path/to/game:/home/game/game -p 8888:8888 tingelst/game:latest
 ```
+Run a command line terminal within the docker container:
+```
+sudo docker run -v /home/ingenieria/repos/game:/home/game/repo/game -ti tingelst/game:latest /bin/bash -c "exec "${SHELL:-sh}""
+```
 
 This will run jupyter notebook and show a link that you can follow in your browser to all the python notebooks.
 
