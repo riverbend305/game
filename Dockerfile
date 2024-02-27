@@ -25,6 +25,7 @@ RUN apt-get update && apt-get -y install \
     libgtest-dev \
     python-dev \
     python3-dev \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
 # RUN cd /usr/src/gtest \
@@ -96,23 +97,24 @@ RUN mkdir -p /home/game/game/ \
    
 
 RUN cd /home/game/ \
-    && virtualenv python \
-    && . python/bin/activate \
-    && pip install \
+    && virtualenv python3 -p /usr/bin/python3 \
+    && . python3/bin/activate \
+    && python3 -m pip install \
        numpy \
        matplotlib \
        scipy \
        notebook \
-       math3d==3.3.0
-       #comm==0.2.1 \
-       #pythreejs \
-    #&& jupyter nbextension enable --py pythreejs
-    # && git clone https://github.com/tingelst/pythreejs.git \
-    # && cd pythreejs \
-    # && pip install -e . \
-    # && jupyter nbextension install --py --symlink --user pythreejs \
-    # && jupyter nbextension enable --py --user pythreejs \
-    # && jupyter nbextension enable --py --sys-prefix widgetsnbextension
+       math3d==3.3.0 \
+       pandas \
+       comm \
+    #   pythreejs
+    # && jupyter nbextension enable --py pythreejs \
+    && git clone https://github.com/tingelst/pythreejs.git \
+    && cd pythreejs \
+    && python3 -m pip install -e . \
+    && jupyter nbextension install --py --symlink --user pythreejs \
+    && jupyter nbextension enable --py --user pythreejs \
+    && jupyter nbextension enable --py --sys-prefix widgetsnbextension
 
 USER root
 VOLUME /home/game/game
@@ -123,6 +125,6 @@ RUN chown -R game:users /home/game/.jupyter
 
 USER game
 EXPOSE 8888
-WORKDIR /home/game/game/python
+WORKDIR /home/game/repo/game/python
 ENTRYPOINT ["tini", "--"]
-CMD ["/bin/zsh", "-c", "source /home/game/python/bin/activate && jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root"]
+CMD ["/bin/zsh", "-c", "source /home/game/python3/bin/activate && jupyter notebook --ip 0.0.0.0 --port 8888 --no-browser --allow-root"]
