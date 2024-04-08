@@ -2,13 +2,10 @@
 	path = third_party/Adept
         url = https://github.com/tingelst/Adept.git
 	branch = jacobian-row-major-output
-[submodule "third_party/benchmark"]
-	path = third_party/benchmark
-	url = https://github.com/google/benchmark.git
 [submodule "third_party/vahlen"]
 	path = third_party/vahlen
 	url = https://github.com/tingelst/vahlen.git
 	
 [submodule "third_party/hep-ga"]
 	path = third_party/hep-ga
-	url = https://github.com/tingelst/hep-ga
+	url = https://github.com/tingelst/hep-ga.git
