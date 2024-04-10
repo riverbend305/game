@@ -31,7 +31,6 @@ RUN apt-get update && apt-get -y install \
     libfreetype6-dev \
     libgoogle-glog-dev \
     libatlas-base-dev \
-    libeigen3-dev \
     libsuitesparse-dev \
     clang-3.8 \
     llvm \
@@ -53,12 +52,12 @@ ENV CXX clang++-3.8
 #RUN pip install --default-timeout=100 virtualenv
 RUN pip install --default-timeout=100 virtualenv==15.1.0
 
-# Install Eigen info /usr/local
+# Install Eigen into /usr/local/include
 RUN mkdir -p /usr/src/ \
-    && curl -SL https://gitlab.com/libeigen/eigen/-/archive/3.2.8/eigen-3.2.8.tar.gz \
+    && curl -SL https://gitlab.com/libeigen/eigen/-/archive/3.2.9/eigen-3.2.9.tar.gz \
     | tar -xvzC /usr/src/ \
-    && mkdir -p /usr/src/eigen-3.2.8/build \
-    && cd /usr/src/eigen-3.2.8/build \
+    && mkdir -p /usr/src/eigen-3.2.9/build \
+    && cd /usr/src/eigen-3.2.9/build \
 	&& cmake .. \
     && make \
 	&& make install
@@ -121,9 +120,18 @@ RUN mkdir -p /home/game/game/ \
     && mkdir /home/game/.jupyter
 
 RUN cd /home/game/ \
-    && virtualenv python3 -p /usr/bin/python3 \
-    && . python3/bin/activate \
-    && python3 -m pip install --default-timeout=100 \
+    && virtualenv py3env -p /usr/bin/python3 \
+    && . py3env/bin/activate \
+    # python == 3.5.2, ipython == 7.9.0
+    && python3 -m pip install ipykernel \
+    && ipython kernel install --name py3 --user \
+    && deactivate \
+    && virtualenv py2env -p /usr/bin/python2 \
+    && . py2env/bin/activate \
+    # python == 2.7.12, ipython == 5.10.0
+    && python -m pip install ipykernel \
+    && ipython kernel install --name py2 --user \
+    && python -m pip install --default-timeout=100 \
        numpy==1.16.0 \
        matplotlib \
        scipy \
@@ -133,7 +141,7 @@ RUN cd /home/game/ \
        comm \
     && git clone https://github.com/tingelst/pythreejs.git \
     && cd pythreejs \
-    && python3 -m pip install --default-timeout=100 -e . \
+    && python -m pip install --default-timeout=100 -e . \
     && jupyter nbextension install --py --symlink --user pythreejs \
     && jupyter nbextension enable --py --user pythreejs \
     && jupyter nbextension enable --py --sys-prefix widgetsnbextension
