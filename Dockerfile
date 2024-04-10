@@ -120,18 +120,18 @@ RUN mkdir -p /home/game/game/ \
     && mkdir /home/game/.jupyter
 
 RUN cd /home/game/ \
-    && virtualenv py3env -p /usr/bin/python3 \
-    && . py3env/bin/activate \
-    # python == 3.5.2, ipython == 7.9.0
-    && python3 -m pip install ipykernel \
-    && ipython kernel install --name py3 --user \
-    && deactivate \
     && virtualenv py2env -p /usr/bin/python2 \
     && . py2env/bin/activate \
     # python == 2.7.12, ipython == 5.10.0
     && python -m pip install ipykernel \
     && ipython kernel install --name py2 --user \
     && python -m pip install --default-timeout=100 \
+    && deactivate \
+    && virtualenv py3env -p /usr/bin/python3 \
+    && . py3env/bin/activate \
+    # python == 3.5.2, ipython == 7.9.0
+    && python3 -m pip install ipykernel \
+    && ipython kernel install --name py3 --user \
        numpy==1.16.0 \
        matplotlib \
        scipy \
