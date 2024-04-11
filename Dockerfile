@@ -125,13 +125,17 @@ RUN cd /home/game/ \
     # python == 2.7.12, ipython == 5.10.0
     && python -m pip install ipykernel \
     && ipython kernel install --name py2 --user \
-    && python -m pip install --default-timeout=100 \
+       numpy==1.16.0 \
+       matplotlib \
+       scipy \
+       notebook \
     && deactivate \
     && virtualenv py3env -p /usr/bin/python3 \
     && . py3env/bin/activate \
     # python == 3.5.2, ipython == 7.9.0
-    && python3 -m pip install ipykernel \
+    && python -m pip install ipykernel \
     && ipython kernel install --name py3 --user \
+    && python -m pip install --default-timeout=100 \
        numpy==1.16.0 \
        matplotlib \
        scipy \
