@@ -47,11 +47,6 @@ ENV CXX clang++-3.8
 
 ## OS Installed
 
-#RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
-#RUN python get-pip.py pip install --default-timeout=100 --upgrade setuptools
-#RUN pip install --default-timeout=100 virtualenv
-RUN pip install --default-timeout=100 virtualenv==15.1.0
-
 # Install Eigen into /usr/local/include
 RUN mkdir -p /usr/src/ \
     && curl -SL https://gitlab.com/libeigen/eigen/-/archive/3.2.9/eigen-3.2.9.tar.gz \
@@ -117,25 +112,30 @@ RUN mkdir -p /home/game/repo/ \
 ## repo built
 
 RUN mkdir -p /home/game/game/ \
-    && mkdir /home/game/.jupyter
+    && mkdir /home/game/.jupyter \
+    && cd /home/game/ 
 
-RUN cd /home/game/ \
-    && virtualenv py2env -p /usr/bin/python2 \
+#RUN wget https://bootstrap.pypa.io/pip/2.7/get-pip.py
+#RUN python get-pip.py pip install --default-timeout=100 --upgrade setuptools
+#RUN pip install --default-timeout=100 virtualenv
+RUN python -m pip install --default-timeout=100 virtualenv==15.1.0 --user
+
+## python == 2.7.12, pip == 8.8.1, ipython == 5.10.0
+RUN python -m virtualenv py2env -p /usr/bin/python2 \
     && . py2env/bin/activate \
-    # python == 2.7.12, ipython == 5.10.0
     && python -m pip install ipykernel \
     && ipython kernel install --name py2 --user \
-       numpy==1.16.0 \
-       matplotlib \
-       scipy \
-       notebook \
-    && deactivate \
-    && virtualenv py3env -p /usr/bin/python3 \
+    && deactivate 
+
+## python == 3.5.2, pip == 20.3.4, ipython == 7.9.0
+RUN python -m virtualenv py3env -p /usr/bin/python3 \
     && . py3env/bin/activate \
-    # python == 3.5.2, ipython == 7.9.0
     && python -m pip install ipykernel \
     && ipython kernel install --name py3 --user \
-    && python -m pip install --default-timeout=100 \
+	&& deactivate
+
+RUN . py3env/bin/activate \
+	&& python -m pip install --default-timeout=100 \
        numpy==1.16.0 \
        matplotlib \
        scipy \
