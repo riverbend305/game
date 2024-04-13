@@ -120,29 +120,28 @@ RUN mkdir -p /home/game/game/ \
 #RUN pip install --default-timeout=100 virtualenv
 RUN python -m pip install --default-timeout=100 virtualenv==15.1.0 --user
 
-## python == 2.7.12, pip == 8.8.1, ipython == 5.10.0
-RUN python -m virtualenv py2env -p /usr/bin/python2 \
-    && . py2env/bin/activate \
-    && python -m pip install ipykernel \
-    && ipython kernel install --name py2 --user \
-    && deactivate 
-
 ## python == 3.5.2, pip == 20.3.4, ipython == 7.9.0
-RUN python -m virtualenv py3env -p /usr/bin/python3 \
-    && . py3env/bin/activate \
+RUN python -m virtualenv /home/user/py3env -p /usr/bin/python3 \
+    && . /home/user/py3env/bin/activate \
     && python -m pip install ipykernel \
     && ipython kernel install --name py3 --user \
-	&& deactivate
+    && deactivate
 
-RUN . py3env/bin/activate \
-	&& python -m pip install --default-timeout=100 \
+## python == 2.7.12, pip == 8.8.1, ipython == 5.10.0
+RUN python -m virtualenv /home/user/py2env -p /usr/bin/python2 \
+    && . /home/user/py2env/bin/activate \
+    && python -m pip install ipykernel \
+    && ipython kernel install --name py2 --user 
+
+#       math3d==3.3.0 \
+#       pandas \
+#       comm \
+
+RUN python -m pip install --default-timeout=100 \
        numpy==1.16.0 \
        matplotlib \
        scipy \
        notebook \
-       math3d==3.3.0 \
-       pandas \
-       comm \
     && git clone https://github.com/tingelst/pythreejs.git \
     && cd pythreejs \
     && python -m pip install --default-timeout=100 -e . \
